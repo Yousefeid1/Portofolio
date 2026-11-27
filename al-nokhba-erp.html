@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP System for Al Nokhba Stone - Case Study | Yousef Eid</title>
+<meta name="description" content="Case study: a full web-based ERP for a marble and granite company. 17 modules and 11 roles covering purchasing, block and slab inventory, manufacturing, export orders, CRM, invoicing, accounting and HR, with an Arabic RTL dashboard. Runs fully in the browser.">
+<meta name="author" content="Yousef Eid Abdelmongy">
+<meta name="theme-color" content="#07090f">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://yousefeid.tech/al-nokhba-erp.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Yousef Eid">
+<meta property="og:title" content="ERP System for Al Nokhba Stone - Case Study">
+<meta property="og:description" content="A browser-based ERP for marble and granite: 17 modules, 11 roles, Arabic RTL UI, inventory valuation, financial reports, export orders and CRM.">
+<meta property="og:url" content="https://yousefeid.tech/al-nokhba-erp.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"ERP System for Al Nokhba Stone (Marble & Granite)","description":"Case study of a web-based ERP built for an Egyptian marble and granite company: 17 modules and 11 roles covering purchasing, block and slab inventory, manufacturing stages and costs, export orders and quotations, CRM, invoicing, accounting and HR. Runs fully in the browser with an Arabic RTL dashboard.","url":"https://yousefeid.tech/al-nokhba-erp.html","datePublished":"2026-11-27","dateModified":"2026-11-27","inLanguage":"en","author":{"@type":"Person","name":"Yousef Eid Abdelmongy","url":"https://yousefeid.tech/","sameAs":["https://www.linkedin.com/in/yousef-eid-81b773297","https://github.com/Yousefeid1"]},"about":{"@type":"SoftwareApplication","name":"Al Nokhba Stone ERP","applicationCategory":"BusinessApplication","operatingSystem":"Web browser"},"dependencies":"JavaScript, HTML, CSS, localStorage"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yousefeid.tech/"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://yousefeid.tech/#projects"},{"@type":"ListItem","position":3,"name":"Al Nokhba Stone ERP","item":"https://yousefeid.tech/al-nokhba-erp.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--bg2:#0b0f1a;--card:#101625;--card2:#131b2e;--line:rgba(255,255,255,.08);--txt:#eef1f7;--mut:#9aa4b8;--gold:#f0b429;--gold2:#ffd97a;--cyan:#38e1c6;--violet:#7c6cf5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.7}
+h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.25}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,9,15,.78);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.15rem;display:flex;align-items:center;gap:9px}
+.logo span{color:var(--gold)}
+.back{color:var(--mut);font-size:.92rem}
+.back:hover{color:var(--gold)}
+.crumbs{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--mut);padding:26px 0 0}
+.crumbs a{color:var(--mut)}.crumbs a:hover{color:var(--gold)}
+header.hero{padding:34px 0 46px;border-bottom:1px solid var(--line)}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.lede{color:var(--mut);font-size:1.08rem;max-width:700px;margin-bottom:26px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.pill{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:12px 24px;border-radius:12px;font-weight:600;font-size:.95rem;transition:.25s;display:inline-flex;align-items:center;gap:8px}
+.btn-gold{background:linear-gradient(120deg,var(--gold),#e09a12);color:#161310}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-size:1.5rem;font-weight:700;margin-bottom:16px}
+p{color:var(--mut);margin-bottom:14px;max-width:760px}
+p b,li b{color:var(--txt);font-weight:600}
+ul{margin:0 0 16px 22px;color:var(--mut)}
+li{margin-bottom:8px;max-width:740px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0}
+.flow span.step{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:.85rem;color:var(--txt)}
+.flow span.arr{color:var(--gold)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.mod{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:14px;padding:18px}
+.mod h3{font-size:1rem;margin-bottom:6px;color:var(--gold2)}
+.mod p{font-size:.92rem;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--cyan);border:1px solid rgba(56,225,198,.3);background:rgba(56,225,198,.06);border-radius:999px;padding:5px 13px}
+.note{border-left:3px solid var(--gold);background:rgba(240,180,41,.06);padding:14px 18px;border-radius:0 12px 12px 0;color:var(--mut);margin:16px 0;max-width:760px}
+.cta{text-align:center;padding:60px 0}
+.cta h2{font-size:clamp(1.5rem,3.4vw,2.1rem)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<nav><div class="nav-in">
+  <a class="logo" href="/"><img src="favicon.svg" alt="" width="28" height="28"><b>Yousef<span>.</span>Eid</b></a>
+  <a class="back" href="/#projects">← All projects</a>
+</div></nav>
+
+<div class="wrap">
+  <div class="crumbs"><a href="/">Home</a> / <a href="/#projects">Projects</a> / Al Nokhba Stone ERP</div>
+
+  <header class="hero">
+    <div class="kicker">Case Study · Web Application · ERP</div>
+    <h1>ERP System for Al Nokhba Stone</h1>
+    <p class="lede">A complete web-based ERP for an Egyptian marble &amp; granite company, covering the full production cycle from raw blocks to export payments. 17 modules, 11 user roles, and a full Arabic RTL dashboard - running entirely in the browser with no backend.</p>
+    <div class="meta">
+      <span class="pill">17 modules</span>
+      <span class="pill">11 roles</span>
+      <span class="pill">Arabic RTL UI</span>
+      <span class="pill">No backend - localStorage</span>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://github.com/Yousefeid1/ERB-Marble" target="_blank" rel="noopener">View on GitHub</a>
+      <a class="btn btn-ghost" href="/#projects">Back to portfolio</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Why this system exists</h2>
+    <p>I worked at Al Nokhba Stone in <b>export sales and marketing</b>, so I saw the daily reality: raw blocks arriving from quarries, slabs tracked by hand, export quotations built in scattered files, and accounting done apart from everything else. I designed and built this ERP to put that whole cycle in one system, in Arabic, for the people who actually run it.</p>
+    <div class="flow">
+      <span class="step">Raw blocks</span><span class="arr">→</span>
+      <span class="step">Cutting &amp; manufacturing</span><span class="arr">→</span>
+      <span class="step">Quality</span><span class="arr">→</span>
+      <span class="step">Slab inventory</span><span class="arr">→</span>
+      <span class="step">Sales &amp; export</span><span class="arr">→</span>
+      <span class="step">Collections</span><span class="arr">→</span>
+      <span class="step">Accounting &amp; reports</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>What it covers</h2>
+    <div class="grid">
+      <div class="mod"><h3>Purchasing &amp; raw blocks</h3><p>Receiving raw blocks from quarries, supplier records and purchasing costs.</p></div>
+      <div class="mod"><h3>Manufacturing</h3><p>Cutting and production stages with cost tracking per stage.</p></div>
+      <div class="mod"><h3>Inventory &amp; slab tracking</h3><p>Raw blocks and finished slabs, with individual slab tracking and FIFO / weighted-average inventory valuation.</p></div>
+      <div class="mod"><h3>Export orders &amp; quotations</h3><p>Quotations and export orders for international clients.</p></div>
+      <div class="mod"><h3>CRM &amp; invoicing</h3><p>Customer records, follow-ups and invoices in one place.</p></div>
+      <div class="mod"><h3>Accounting &amp; HR</h3><p>Collections and payments, plus HR records for the team.</p></div>
+    </div>
+    <h3 style="font-size:1.08rem;color:var(--gold2);margin:22px 0 8px">Financial reports</h3>
+    <ul>
+      <li><b>Profit &amp; loss</b>, <b>balance sheet</b> and <b>cash-flow</b> reports generated from the system's own data.</li>
+      <li>Interactive dashboards with charts, in both dark and light modes.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Technical choices</h2>
+    <div class="note"><b>No backend, by design.</b> The whole system runs in the browser and uses localStorage as its database. For a small company that means zero hosting cost, zero server maintenance, and data that stays on the machine used every day.</div>
+    <ul>
+      <li>Full <b>Arabic right-to-left interface</b>, built for the team's daily use rather than translated as an afterthought.</li>
+      <li><b>11 user roles</b> so each person sees the modules their job needs.</li>
+      <li>Built with plain <b>JavaScript, HTML and CSS</b> - no framework lock-in, easy to hand over and extend.</li>
+    </ul>
+    <div class="chips">
+      <span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">localStorage</span><span class="chip">Arabic RTL</span><span class="chip">ERP</span><span class="chip">Accounting</span><span class="chip">Inventory</span><span class="chip">CRM</span>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Need a system like this for your business?</h2>
+    <p style="margin:0 auto 22px">I build web systems shaped around how a business actually works.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn btn-gold" href="mailto:yousefeid12006@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="https://github.com/Yousefeid1/ERB-Marble" target="_blank" rel="noopener">See the code</a>
+    </div>
+  </section>
+</div>
+
+<footer><div class="wrap">
+  <span>© 2026 Yousef Eid</span>
+  <span><a href="https://github.com/Yousefeid1" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/yousef-eid-81b773297" target="_blank" rel="noopener">LinkedIn</a> · <a href="mailto:yousefeid12006@gmail.com">Email</a></span>
+</div></footer>
+</body>
+</html>
