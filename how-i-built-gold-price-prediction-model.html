@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How I Built a Gold Price Prediction Model with Python | Yousef Eid</title>
+<meta name="description" content="The story of my first full machine learning project: predicting gold prices from 2017-2025 daily data with Python, Pandas and Lasso Regression. Data cleaning, feature engineering, GridSearchCV tuning and honest evaluation with RMSE, MAE and R-squared.">
+<meta name="author" content="Yousef Eid Abdelmongy">
+<meta name="theme-color" content="#07090f">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://yousefeid.tech/how-i-built-gold-price-prediction-model.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Yousef Eid">
+<meta property="og:title" content="How I Built a Gold Price Prediction Model with Python">
+<meta property="og:description" content="My first full ML workflow: cleaning daily gold price data (2017-2025), engineering features that carry signal, and tuning Lasso Regression with GridSearchCV.">
+<meta property="og:url" content="https://yousefeid.tech/how-i-built-gold-price-prediction-model.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How I Built a Gold Price Prediction Model with Python and Lasso Regression","description":"The story of my first full machine learning project: predicting gold prices from 2017-2025 daily data. Data cleaning, feature engineering with moving averages and lag features, Lasso Regression tuned with GridSearchCV, evaluated with RMSE, MAE and R-squared.","url":"https://yousefeid.tech/how-i-built-gold-price-prediction-model.html","datePublished":"2026-11-27","dateModified":"2026-11-27","inLanguage":"en","author":{"@type":"Person","name":"Yousef Eid Abdelmongy","url":"https://yousefeid.tech/","sameAs":["https://www.linkedin.com/in/yousef-eid-81b773297","https://github.com/Yousefeid1"]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yousefeid.tech/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://yousefeid.tech/#articles"},{"@type":"ListItem","position":3,"name":"How I Built a Gold Price Prediction Model","item":"https://yousefeid.tech/how-i-built-gold-price-prediction-model.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--bg2:#0b0f1a;--card:#101625;--card2:#131b2e;--line:rgba(255,255,255,.08);--txt:#eef1f7;--mut:#9aa4b8;--gold:#f0b429;--gold2:#ffd97a;--cyan:#38e1c6;--violet:#7c6cf5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.7}
+h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.25}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,9,15,.78);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.15rem;display:flex;align-items:center;gap:9px}
+.logo span{color:var(--gold)}
+.back{color:var(--mut);font-size:.92rem}
+.back:hover{color:var(--gold)}
+.crumbs{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--mut);padding:26px 0 0}
+.crumbs a{color:var(--mut)}.crumbs a:hover{color:var(--gold)}
+header.hero{padding:34px 0 46px;border-bottom:1px solid var(--line)}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.lede{color:var(--mut);font-size:1.08rem;max-width:700px;margin-bottom:26px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.pill{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:12px 24px;border-radius:12px;font-weight:600;font-size:.95rem;transition:.25s;display:inline-flex;align-items:center;gap:8px}
+.btn-gold{background:linear-gradient(120deg,var(--gold),#e09a12);color:#161310}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-size:1.5rem;font-weight:700;margin-bottom:16px}
+h3{font-size:1.08rem;font-weight:600;margin:22px 0 8px;color:var(--gold2)}
+p{color:var(--mut);margin-bottom:14px;max-width:760px}
+p b,li b{color:var(--txt);font-weight:600}
+ul,ol{margin:0 0 16px 22px;color:var(--mut)}
+li{margin-bottom:8px;max-width:740px}
+code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--cyan)}
+.note{border-left:3px solid var(--gold);background:rgba(240,180,41,.06);padding:14px 18px;border-radius:0 12px 12px 0;color:var(--mut);margin:16px 0;max-width:760px}
+.cta{text-align:center;padding:60px 0}
+.cta h2{font-size:clamp(1.5rem,3.4vw,2.1rem)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<nav><div class="nav-in">
+  <a class="logo" href="/"><img src="favicon.svg" alt="" width="28" height="28"><b>Yousef<span>.</span>Eid</b></a>
+  <a class="back" href="/#articles">&larr; All articles</a>
+</div></nav>
+
+<div class="wrap">
+  <div class="crumbs"><a href="/">Home</a> / <a href="/#articles">Articles</a> / How I Built a Gold Price Prediction Model</div>
+
+  <header class="hero">
+    <div class="kicker">Article &middot; Machine Learning &middot; Nov 2026</div>
+    <h1>How I Built a Gold Price Prediction Model with Python</h1>
+    <p class="lede">My first full machine learning workflow, end to end: a real daily dataset, cleaning decisions I had to defend, feature engineering that actually carried signal, and a Lasso Regression model tuned with GridSearchCV and judged with three metrics, not one.</p>
+    <div class="meta">
+      <span class="pill">Python</span>
+      <span class="pill">Pandas &middot; scikit-learn</span>
+      <span class="pill">Lasso Regression</span>
+      <span class="pill">Time series 2017-2025</span>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="gold-price-prediction.html">Read the case study</a>
+      <a class="btn btn-ghost" href="/#articles">More articles</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Why gold</h2>
+    <p>I come from business before machine learning. I worked in sales and export for marble and granite companies, and in Egypt gold is a market everyone watches daily. So when I wanted a first serious ML project during my DEPI Machine Learning Engineer track, predicting gold prices felt natural: real data, real stakes, and a target I actually understand.</p>
+    <p>I used the Kaggle dataset <b>DOJI gold price 2017-2025</b> (the file <code>DOJI_SG_gold_price_2017_2025.csv</code>), loaded with KaggleHub, and set the target as the daily <b>selling price</b>.</p>
+  </section>
+
+  <section>
+    <h2>Cleaning: the part nobody posts about</h2>
+    <p>The raw daily data had the usual problems: missing values and outliers. I handled missing values and treated outliers instead of dropping rows blindly, because in a time series every deleted row is a hole in the timeline.</p>
+    <div class="note"><b>The cleaning decision I am most sure about:</b> I did not use <code>drop_duplicates()</code>. Identical consecutive prices are not duplicate rows, they are days when the market genuinely closed at the same price. Removing them would have thrown away real trading days and distorted the series.</div>
+    <p>Early on I also hit a <code>KeyError</code> on the date column, which forced me to stop assuming and actually inspect the dataset schema. A boring step that saves hours.</p>
+  </section>
+
+  <section>
+    <h2>Feature engineering that carries signal</h2>
+    <p>My first attempt was naive: I one-hot encoded the date and currency columns and the data exploded to roughly <b>5,105 columns</b>. It was slow, sparse, and useless. That failure pushed me toward compact numeric features that describe how prices behave:</p>
+    <ul>
+      <li><b>MA_7 and MA_30</b>: moving averages that capture short and medium trend.</li>
+      <li><b>Daily_Return</b>: the day-over-day percentage change, a basic momentum signal.</li>
+      <li><b>Lag features</b>: previous days' prices, so the model sees recent history, not just today.</li>
+    </ul>
+    <p>Few features, each with a reason to exist. That is what actually worked.</p>
+  </section>
+
+  <section>
+    <h2>Modeling and tuning</h2>
+    <p>I chose <b>Lasso Regression</b> for two reasons: it is a solid baseline for a numeric regression problem, and it does feature selection by itself by shrinking weak coefficients to zero, which suits a dataset with several engineered features.</p>
+    <p>Instead of guessing the regularization strength, I used <b>GridSearchCV</b> to search for it with cross-validation. My instinct would have picked a value in seconds and been wrong in silence.</p>
+  </section>
+
+  <section>
+    <h2>Evaluation: three metrics, not one</h2>
+    <p>I evaluated the model with <b>RMSE</b>, <b>MAE</b> and <b>R&sup2;</b>, and plotted actual vs predicted prices with Matplotlib and Seaborn. Each metric catches a different lie: RMSE punishes big errors, MAE shows the typical error, and R&sup2; tells you how much of the movement the model explains at all.</p>
+    <p>The full technical breakdown, including the stack and decisions, is in the <a href="gold-price-prediction.html" style="color:var(--gold)">project case study</a>.</p>
+  </section>
+
+  <section>
+    <h2>What I would tell myself before starting</h2>
+    <ul>
+      <li>Inspect the schema before writing a single line of cleaning code.</li>
+      <li>Validate inputs before training, not after a failed fit. A missing target column taught me that.</li>
+      <li>Repeated values in a time series are data, not duplicates.</li>
+      <li>Never trust one metric, and never guess a hyperparameter you can search for.</li>
+    </ul>
+  </section>
+
+  <section class="cta">
+    <h2>Working on something similar?</h2>
+    <p style="margin:0 auto 22px">I'm open to ML internships, junior roles and data projects.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn btn-gold" href="mailto:yousefeid12006@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="first-ml-project-mistakes.html">Read: my first-project mistakes</a>
+    </div>
+  </section>
+</div>
+
+<footer><div class="wrap">
+  <span>&copy; 2026 Yousef Eid</span>
+  <span><a href="https://github.com/Yousefeid1" target="_blank" rel="noopener">GitHub</a> &middot; <a href="https://www.linkedin.com/in/yousef-eid-81b773297" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:yousefeid12006@gmail.com">Email</a></span>
+</div></footer>
+<script data-goatcounter="https://yousefeid.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
