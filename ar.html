@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>يوسف عيد | مهندس تعلم آلة</title>
-<meta name="description" content="يوسف عيد عبدالمنعم - مهندس تعلم آلة (مسار DEPI)، طالب حاسبات ومعلومات وقائد أعمال. مشاريع تعلم آلة وتحليل بيانات وتطوير ويب وأنظمة ERP.">
+<title>يوسف عيد عبد المنجي | مهندس تعلم آلة</title>
+<meta name="description" content="يوسف عيد عبد المنجي - مهندس تعلم آلة (مسار DEPI)، طالب حاسبات ومعلومات وقائد أعمال. مشاريع تعلم آلة وتحليل بيانات وتطوير ويب وأنظمة ERP.">
 <meta name="author" content="Yousef Eid Abdelmongy">
 <meta name="theme-color" content="#07090f">
 <meta name="color-scheme" content="dark">
@@ -18,13 +18,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Yousef Eid">
 <meta property="og:locale" content="ar_EG">
-<meta property="og:title" content="يوسف عيد | مهندس تعلم آلة">
+<meta property="og:title" content="يوسف عيد عبد المنجي | مهندس تعلم آلة">
 <meta property="og:description" content="مشاريع تعلم آلة وتحليل بيانات وتطوير ويب وأنظمة ERP. مسار مهندس تعلم الآلة من DEPI، طالب حاسبات ومعلومات وقائد أعمال.">
 <meta property="og:url" content="https://yousefeid.tech/ar.html">
 <meta property="og:image" content="https://yousefeid.tech/35-og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Yousef Eid Abdelmongy","alternateName":"يوسف عيد عبدالمنعم","url":"https://yousefeid.tech/","image":"https://yousefeid.tech/profile.jpg","jobTitle":"Machine Learning Engineer","address":{"@type":"PostalAddress","addressLocality":"Cairo","addressCountry":"EG"},"sameAs":["https://www.linkedin.com/in/yousef-eid-81b773297","https://github.com/Yousefeid1"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Yousef Eid Abdelmongy","alternateName":"يوسف عيد عبد المنجي","url":"https://yousefeid.tech/","image":"https://yousefeid.tech/profile.jpg","jobTitle":"Machine Learning Engineer","address":{"@type":"PostalAddress","addressLocality":"Cairo","addressCountry":"EG"},"sameAs":["https://www.linkedin.com/in/yousef-eid-81b773297","https://github.com/Yousefeid1"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -57,8 +57,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);ba
 .nav-links a:hover{color:var(--txt)}
 .nav-links a::after{content:"";position:absolute;right:0;bottom:-2px;height:2px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .25s}
 .nav-links a:hover::after{transform:scaleX(1)}
-.lang-sw{font-family:'JetBrains Mono',monospace;font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:5px 13px;color:var(--mut)}
-.lang-sw:hover{border-color:var(--gold);color:var(--gold)}
 .nav-cta{border:1px solid var(--gold);color:var(--gold);padding:8px 18px;border-radius:999px;font-weight:600;font-size:.88rem;transition:.25s}
 .nav-cta:hover{background:var(--gold);color:#131313}
 .burger{display:none;background:none;border:0;color:var(--txt);font-size:1.5rem;cursor:pointer}
@@ -201,6 +199,14 @@ nav,section,header,footer{position:relative;z-index:1}
 .foot-links a:hover{color:var(--gold)}
 @media(max-width:640px){section{padding:72px 0}.wrap{padding:0 20px}.hero{padding:110px 0 56px}.btn-row .btn{flex:1;justify-content:center}.cc{width:100%}.stat b{font-size:1.05rem}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero .tag,.hero h1,.hero .role,.hero p.lede,.hero .btn-row,.hero-card,.reveal{opacity:1!important;transform:none!important}html{scroll-behavior:auto}}
+
+/* LANGUAGE TOGGLE */
+.nav-right{display:flex;align-items:center;gap:14px}
+.lang-sw{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1;white-space:nowrap;flex:0 0 auto}
+.lang-sw>*{padding:7px 11px;color:var(--mut);text-decoration:none;transition:.2s;display:block}
+.lang-sw .on{background:var(--gold);color:#131313;font-weight:700}
+.lang-sw a:hover{color:var(--gold)}
+@media(max-width:700px){.nav-cta,.nav-hide-sm{display:none}}
 </style>
 <noscript><style>.reveal,.hero .tag,.hero h1,.hero .role,.hero p.lede,.hero .btn-row,.hero-card{opacity:1!important;transform:none!important;animation:none!important}</style></noscript>
 </head>
@@ -217,9 +223,11 @@ nav,section,header,footer{position:relative;z-index:1}
       <a href="#articles">مقالات</a>
       <a href="#experience">خبرتي</a>
       <a href="#education">تعليمي</a>
-      <a class="lang-sw" href="/" hreflang="en" lang="en" title="English version">EN</a>
     </div>
-    <a class="nav-cta" href="#contact">تواصل معي</a>
+    <div class="nav-right">
+      <div class="lang-sw" role="group" aria-label="اللغة"><a href="/" hreflang="en" lang="en" title="English version">EN</a><span class="on" aria-current="true">عربي</span></div>
+      <a class="nav-cta" href="#contact">تواصل معي</a>
+    </div>
     <button class="burger" id="burger" aria-label="القائمة" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
   </div>
 </nav>
@@ -229,7 +237,7 @@ nav,section,header,footer{position:relative;z-index:1}
   <div class="wrap hero-grid">
     <div>
       <span class="tag">متاح لتدريب ووظائف جونيور في تعلم الآلة</span>
-      <h1>يوسف عيد<br><span class="grad">عبدالمنعم</span></h1>
+      <h1>يوسف عيد<br><span class="grad">عبد المنجي</span></h1>
       <div class="role">مهندس تعلم آلة <b>&middot;</b> بيانات وويب <b>&middot;</b> قائد أعمال</div>
       <p class="lede">أبني نماذج تعلم آلة وأقود فرق مبيعات. أكملت مسار مهندس تعلم الآلة من مبادرة رواد مصر الرقمية (DEPI)، وأدرس علوم الحاسب، وأسّست ScaleForce، لأحوّل أكثر من 4 سنوات خبرة في الأعمال إلى منتجات تعتمد على البيانات.</p>
       <div class="btn-row">
@@ -239,7 +247,7 @@ nav,section,header,footer{position:relative;z-index:1}
       </div>
     </div>
     <div class="hero-card">
-      <div class="avatar"><img src="profile.jpg" alt="صورة يوسف عيد عبدالمنعم" width="132" height="132" fetchpriority="high"></div>
+      <div class="avatar"><img src="profile.jpg" alt="صورة يوسف عيد عبد المنجي" width="132" height="132" fetchpriority="high"></div>
       <h3 style="margin-bottom:4px">يوسف عيد</h3>
       <p style="color:var(--mut);font-size:.9rem">القاهرة، مصر &middot; العربية (لغة أم)، الإنجليزية (جيدة)</p>
       <div class="stat-row">
@@ -454,7 +462,7 @@ nav,section,header,footer{position:relative;z-index:1}
 <footer>
   <div class="wrap">
     <div class="foot-links"><a href="https://github.com/Yousefeid1" target="_blank" rel="noopener">جيت هب</a><a href="https://www.linkedin.com/in/yousef-eid-81b773297" target="_blank" rel="noopener">لينكدإن</a><a href="mailto:yousefeid12006@gmail.com">البريد</a><a href="/" hreflang="en">English version</a></div>
-    &copy; 2026 يوسف عيد عبدالمنعم &middot; القاهرة، مصر &middot; بُني بشغف للبيانات والأعمال</div>
+    &copy; 2026 يوسف عيد عبد المنجي &middot; القاهرة، مصر &middot; بُني بشغف للبيانات والأعمال</div>
 </footer>
 
 <button class="totop" id="totop" aria-label="العودة للأعلى">&uarr;</button>
