@@ -1,0 +1,17 @@
+# Yousef Eid
+
+> Personal portfolio of Yousef Eid Abdelmongy, a machine learning engineer and Computer Science student based in Cairo, Egypt. He builds machine learning models, web platforms and ERP systems, completed the DEPI Machine Learning Engineer track, and founded ScaleForce.
+
+## Main page
+
+- [Portfolio home](https://yousefeid.tech/): About, machine learning and data skills, web and ERP projects, work experience, education and certifications, and contact details (email, WhatsApp, LinkedIn, GitHub).
+
+## Profiles
+
+- [LinkedIn](https://www.linkedin.com/in/yousef-eid-81b773297): Professional profile and experience.
+- [GitHub](https://github.com/Yousefeid1): Source code and projects.
+
+## Contact
+
+- Email: yousefeid12006@gmail.com
+- WhatsApp / Phone: +20 100 111 8694
