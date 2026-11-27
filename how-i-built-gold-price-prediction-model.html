@@ -62,12 +62,23 @@ code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:rgba(255,
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:.85rem}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 footer a:hover{color:var(--gold)}
+
+/* LANGUAGE TOGGLE */
+.nav-right{display:flex;align-items:center;gap:14px}
+.lang-sw{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1;white-space:nowrap;flex:0 0 auto}
+.lang-sw>*{padding:7px 11px;color:var(--mut);text-decoration:none;transition:.2s;display:block}
+.lang-sw .on{background:var(--gold);color:#131313;font-weight:700}
+.lang-sw a:hover{color:var(--gold)}
+@media(max-width:700px){.nav-cta,.nav-hide-sm{display:none}}
 </style>
 </head>
 <body>
 <nav><div class="nav-in">
   <a class="logo" href="/"><img src="favicon.svg" alt="" width="28" height="28"><b>Yousef<span>.</span>Eid</b></a>
-  <a class="back" href="/#articles">&larr; All articles</a>
+  <div class="nav-right">
+    <div class="lang-sw" role="group" aria-label="Language"><span class="on" aria-current="true">EN</span><a href="/ar.html" hreflang="ar" lang="ar" title="النسخة العربية">عربي</a></div>
+    <a class="back" href="/#articles">&larr; All articles</a>
+  </div>
 </div></nav>
 
 <div class="wrap">
@@ -146,7 +157,7 @@ footer a:hover{color:var(--gold)}
 </div>
 
 <footer><div class="wrap">
-  <span>&copy; 2026 Yousef Eid</span>
+  <span>&copy; 2026 Yousef Eid Abdelmongy</span>
   <span><a href="https://github.com/Yousefeid1" target="_blank" rel="noopener">GitHub</a> &middot; <a href="https://www.linkedin.com/in/yousef-eid-81b773297" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:yousefeid12006@gmail.com">Email</a></span>
 </div></footer>
 <script data-goatcounter="https://yousefeid.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
