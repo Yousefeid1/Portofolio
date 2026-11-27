@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Mistakes I Made in My First Machine Learning Project | Yousef Eid</title>
+<meta name="description" content="Honest lessons from my first ML project, a gold price prediction model: a KeyError on the date column, a missing target column, one-hot encoding that exploded the data to 5,105 columns, the drop_duplicates trap in time series, and guessing hyperparameters instead of using GridSearchCV.">
+<meta name="author" content="Yousef Eid Abdelmongy">
+<meta name="theme-color" content="#07090f">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://yousefeid.tech/first-ml-project-mistakes.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Yousef Eid">
+<meta property="og:title" content="5 Mistakes I Made in My First Machine Learning Project">
+<meta property="og:description" content="KeyError on the date column, a missing target, 5,105 one-hot columns, the drop_duplicates trap, and guessed hyperparameters. What each mistake taught me.">
+<meta property="og:url" content="https://yousefeid.tech/first-ml-project-mistakes.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"5 Mistakes I Made in My First Machine Learning Project","description":"Honest lessons from building a gold price prediction model: a KeyError on the date column, a missing target column, one-hot encoding that exploded the data to 5,105 columns, the drop_duplicates trap in time series data, and guessing hyperparameters instead of using GridSearchCV.","url":"https://yousefeid.tech/first-ml-project-mistakes.html","datePublished":"2026-11-27","dateModified":"2026-11-27","inLanguage":"en","author":{"@type":"Person","name":"Yousef Eid Abdelmongy","url":"https://yousefeid.tech/","sameAs":["https://www.linkedin.com/in/yousef-eid-81b773297","https://github.com/Yousefeid1"]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yousefeid.tech/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://yousefeid.tech/#articles"},{"@type":"ListItem","position":3,"name":"5 Mistakes I Made in My First ML Project","item":"https://yousefeid.tech/first-ml-project-mistakes.html"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--bg2:#0b0f1a;--card:#101625;--card2:#131b2e;--line:rgba(255,255,255,.08);--txt:#eef1f7;--mut:#9aa4b8;--gold:#f0b429;--gold2:#ffd97a;--cyan:#38e1c6;--violet:#7c6cf5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.7}
+h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.25}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,9,15,.78);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.15rem;display:flex;align-items:center;gap:9px}
+.logo span{color:var(--gold)}
+.back{color:var(--mut);font-size:.92rem}
+.back:hover{color:var(--gold)}
+.crumbs{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--mut);padding:26px 0 0}
+.crumbs a{color:var(--mut)}.crumbs a:hover{color:var(--gold)}
+header.hero{padding:34px 0 46px;border-bottom:1px solid var(--line)}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.lede{color:var(--mut);font-size:1.08rem;max-width:700px;margin-bottom:26px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.pill{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:12px 24px;border-radius:12px;font-weight:600;font-size:.95rem;transition:.25s;display:inline-flex;align-items:center;gap:8px}
+.btn-gold{background:linear-gradient(120deg,var(--gold),#e09a12);color:#161310}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line);color:var(--txt);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-size:1.5rem;font-weight:700;margin-bottom:16px}
+h3{font-size:1.08rem;font-weight:600;margin:22px 0 8px;color:var(--gold2)}
+p{color:var(--mut);margin-bottom:14px;max-width:760px}
+p b,li b{color:var(--txt);font-weight:600}
+ul,ol{margin:0 0 16px 22px;color:var(--mut)}
+li{margin-bottom:8px;max-width:740px}
+code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--cyan)}
+.note{border-left:3px solid var(--gold);background:rgba(240,180,41,.06);padding:14px 18px;border-radius:0 12px 12px 0;color:var(--mut);margin:16px 0;max-width:760px}
+.mistake{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:26px;margin:18px 0}
+.mistake h3{margin-top:0}
+.lesson{color:var(--gold2);font-size:.92rem;font-weight:600;margin-top:12px}
+.cta{text-align:center;padding:60px 0}
+.cta h2{font-size:clamp(1.5rem,3.4vw,2.1rem)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<nav><div class="nav-in">
+  <a class="logo" href="/"><img src="favicon.svg" alt="" width="28" height="28"><b>Yousef<span>.</span>Eid</b></a>
+  <a class="back" href="/#articles">&larr; All articles</a>
+</div></nav>
+
+<div class="wrap">
+  <div class="crumbs"><a href="/">Home</a> / <a href="/#articles">Articles</a> / 5 Mistakes I Made in My First ML Project</div>
+
+  <header class="hero">
+    <div class="kicker">Article &middot; Machine Learning &middot; Nov 2026</div>
+    <h1>5 Mistakes I Made in My First Machine Learning Project</h1>
+    <p class="lede">My first real ML project was a gold price prediction model built on daily data from 2017 to 2025. It works now, but only because it failed in instructive ways first. These are the five mistakes that cost me the most time, and what each one taught me.</p>
+    <div class="meta">
+      <span class="pill">Beginner lessons</span>
+      <span class="pill">Data cleaning</span>
+      <span class="pill">Feature engineering</span>
+      <span class="pill">scikit-learn</span>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="gold-price-prediction.html">See the finished project</a>
+      <a class="btn btn-ghost" href="/#articles">More articles</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>The mistakes</h2>
+
+    <div class="mistake">
+      <h3>1. I assumed the column names instead of looking</h3>
+      <p>I wrote cleaning code against the schema I <b>expected</b>, and the script died with a <code>KeyError</code> on the date column. The real column was named differently than my assumption.</p>
+      <p class="lesson">Lesson: print the actual schema first. Two minutes of inspection beats an hour of debugging code written against a dataset that does not exist.</p>
+    </div>
+
+    <div class="mistake">
+      <h3>2. I discovered a missing target column too late</h3>
+      <p>At one point I only found out my target column was missing when the model fit failed. Everything before that line ran fine, which made the real problem harder to see.</p>
+      <p class="lesson">Lesson: validate inputs before training. Check that the target exists, has the right type, and has no surprises, before a single model line runs.</p>
+    </div>
+
+    <div class="mistake">
+      <h3>3. I one-hot encoded my way to 5,105 columns</h3>
+      <p>My first feature attempt one-hot encoded the date and currency columns. The dataset exploded to roughly <b>5,105 columns</b>: slow, sparse, and useless for the model. Most of those columns carried no signal at all.</p>
+      <p class="lesson">Lesson: more columns is not more information. The final model uses a handful of compact numeric features instead: MA_7 and MA_30 moving averages, Daily_Return, and lag features. Each one exists for a reason.</p>
+    </div>
+
+    <div class="mistake">
+      <h3>4. I almost treated repeated prices as duplicates</h3>
+      <p>In a spreadsheet mindset, identical consecutive rows look like duplicates. In a gold price time series, the same closing price on two days is two real market observations. Calling <code>drop_duplicates()</code> would have deleted real trading days and distorted the timeline the model learns from.</p>
+      <p class="lesson">Lesson: cleaning rules depend on the data's meaning, not just its shape. Time series data plays by different rules than a customer table.</p>
+    </div>
+
+    <div class="mistake">
+      <h3>5. I guessed a hyperparameter I could have searched for</h3>
+      <p>Lasso Regression lives or dies by its regularization strength. My first instinct was to pick a value and move on. Instead I used <b>GridSearchCV</b> to search for it with cross-validation, and let the data argue with my guess.</p>
+      <p class="lesson">Lesson: never hand-pick a number that a search can find. Cross-validation is slower than guessing and cheaper than being wrong.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The pattern behind all five</h2>
+    <p>Every mistake above is the same mistake in a different costume: <b>acting on assumptions before checking reality</b>. The schema, the target column, the meaning of a repeated price, the right regularization strength. The fix is always to look first.</p>
+    <p>The project that came out of these mistakes is documented in the <a href="gold-price-prediction.html" style="color:var(--gold)">gold price prediction case study</a>, and the full build story is in <a href="how-i-built-gold-price-prediction-model.html" style="color:var(--gold)">how I built the model</a>.</p>
+  </section>
+
+  <section class="cta">
+    <h2>Starting your own first ML project?</h2>
+    <p style="margin:0 auto 22px">Happy to share what I know, and I'm open to ML internships and junior roles.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn btn-gold" href="mailto:yousefeid12006@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="how-i-built-gold-price-prediction-model.html">Read: how I built the model</a>
+    </div>
+  </section>
+</div>
+
+<footer><div class="wrap">
+  <span>&copy; 2026 Yousef Eid</span>
+  <span><a href="https://github.com/Yousefeid1" target="_blank" rel="noopener">GitHub</a> &middot; <a href="https://www.linkedin.com/in/yousef-eid-81b773297" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:yousefeid12006@gmail.com">Email</a></span>
+</div></footer>
+<script data-goatcounter="https://yousefeid.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
