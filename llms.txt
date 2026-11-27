@@ -6,6 +6,12 @@
 
 - [Portfolio home](https://yousefeid.tech/): About, machine learning and data skills, web and ERP projects, work experience, education and certifications, and contact details (email, WhatsApp, LinkedIn, GitHub).
 
+## Project case studies
+
+- [Gold Price Analysis & Prediction](https://yousefeid.tech/gold-price-prediction.html): Machine learning case study - predicting gold prices from 2017-2025 data with Lasso Regression tuned by GridSearchCV; feature engineering (moving averages, daily returns, lag features); evaluated with RMSE, MAE and R-squared. Python, Pandas, scikit-learn.
+- [ERP System for Al Nokhba Stone](https://yousefeid.tech/al-nokhba-erp.html): Browser-based ERP for a marble and granite company - 17 modules and 11 roles covering purchasing, block and slab inventory, manufacturing, export orders, CRM, invoicing, accounting and HR; Arabic RTL dashboard; no backend (localStorage).
+- [Tech Career Roadmap Platform](https://yousefeid.tech/tech-career-roadmap.html): EdTech web platform that helps CS students choose their tech track with organized learning tracks, roadmaps and curated free resources; he led the team and delivered the first working prototype.
+
 ## Profiles
 
 - [LinkedIn](https://www.linkedin.com/in/yousef-eid-81b773297): Professional profile and experience.
