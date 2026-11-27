@@ -4,13 +4,23 @@
 
 ## Main page
 
-- [Portfolio home](https://yousefeid.tech/): About, machine learning and data skills, web and ERP projects, work experience, education and certifications, and contact details (email, WhatsApp, LinkedIn, GitHub).
+- [Portfolio home](https://yousefeid.tech/): About, machine learning and data skills, web and ERP projects, work experience, education and certifications, articles, and contact details (email, WhatsApp, LinkedIn, GitHub).
+- [النسخة العربية](https://yousefeid.tech/ar.html): Arabic version of the portfolio homepage.
 
 ## Project case studies
 
 - [Gold Price Analysis & Prediction](https://yousefeid.tech/gold-price-prediction.html): Machine learning case study - predicting gold prices from 2017-2025 data with Lasso Regression tuned by GridSearchCV; feature engineering (moving averages, daily returns, lag features); evaluated with RMSE, MAE and R-squared. Python, Pandas, scikit-learn.
 - [ERP System for Al Nokhba Stone](https://yousefeid.tech/al-nokhba-erp.html): Browser-based ERP for a marble and granite company - 17 modules and 11 roles covering purchasing, block and slab inventory, manufacturing, export orders, CRM, invoicing, accounting and HR; Arabic RTL dashboard; no backend (localStorage).
 - [Tech Career Roadmap Platform](https://yousefeid.tech/tech-career-roadmap.html): EdTech web platform that helps CS students choose their tech track with organized learning tracks, roadmaps and curated free resources; he led the team and delivered the first working prototype.
+
+## Articles
+
+- [How I Built a Gold Price Prediction Model with Python](https://yousefeid.tech/how-i-built-gold-price-prediction-model.html): First-person story of his first full ML workflow - cleaning the DOJI gold price daily dataset (2017-2025), feature engineering with MA_7, MA_30, Daily_Return and lag features, Lasso Regression tuned with GridSearchCV, evaluated with RMSE, MAE and R-squared.
+- [5 Mistakes I Made in My First Machine Learning Project](https://yousefeid.tech/first-ml-project-mistakes.html): Honest lessons - a KeyError on the date column, a missing target column, one-hot encoding that exploded the data to 5,105 columns, the drop_duplicates trap in time series, and guessing hyperparameters instead of searching.
+
+## CV
+
+- [Download CV (PDF)](https://github.com/Yousefeid1/Portofolio/releases/download/cv/2-Yousef_Eid_CV.pdf): Machine Learning Engineer resume - 4+ years of business experience, DEPI ML track, ML, web and ERP projects.
 
 ## Profiles
 
